@@ -1,6 +1,6 @@
 import React from "react";
 import {projectDataActions} from "../../actions/index";
-import {Link} from "react-router/es6";
+import {Link} from "react-router";
 import "./menu.scss";
 import PropTypes from "prop-types";
 

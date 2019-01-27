@@ -1,6 +1,6 @@
 import React from "react";
 import {projectDataActions} from "../../actions/index";
-import {Link} from "react-router/es6";
+import {Link} from "react-router";
 import "./pagination.scss";
 import PropTypes from "prop-types";
 import classNames from 'classnames/bind';

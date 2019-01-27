@@ -1,25 +1,11 @@
 import React from 'react';
-import {Header} from '../../components/header/header';
-import { connect } from "react-redux";
-import { projectDataActions } from "../../actions/index";
-
-
-export class About extends React.Component {
-  constructor(props) {    
-    super(props);
-  }
-  
-  render() {      
-    return (
-      <div>
-        <Header />    
-        <div>About</div>   
-      </div>
-    )
-  }
+import loadable from 'react-loadable';
+// contact route component
+const LoadingAbout = () => <h3>please wait...</h3>;
+const AboutComponentPromise = () => {
+  return import('./about');
 }
-  
-export default connect(
-  state => ({ data:  state.projectDataReducer }),
-  { ...projectDataActions }
-)(About);
+export const AcyncAboutComponent = loadable( {
+  loader: AboutComponentPromise,
+  loading: LoadingAbout
+} );

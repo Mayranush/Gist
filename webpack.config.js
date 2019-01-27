@@ -12,11 +12,6 @@ const staticsPath = path.join(__dirname, './static');
 const extractCSS = new ExtractTextPlugin({ filename: 'style.css', disable: false, allChunks: true });
 
 const plugins = [
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: Infinity,
-    filename: 'vendor.bundle.js'
-  }),
   new webpack.DefinePlugin({
     'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
   }),
@@ -70,6 +65,7 @@ if (isProd) {
 }
 
 module.exports = {
+  mode: 'development',
   devtool: isProd ? 'source-map' : 'cheap-module-source-map',
   context: sourcePath,
   entry: {
@@ -129,6 +125,13 @@ module.exports = {
       sourcePath,
       'node_modules'
     ]
+  },
+  optimization: {
+    splitChunks: {
+        name: 'common',
+        minChunks: 2,
+        chunks: 'async',
+    }
   },
   plugins: plugins,
   devServer: {

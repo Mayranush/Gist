@@ -1,14 +1,18 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { routerMiddleware } from 'react-router-redux';
-import thunk from "redux-thunk";
-import projectDataReducer  from "./reducers";
-import { browserHistory } from 'react-router/es6';
+import thunk from 'redux-thunk';
+import loggedUserReducer  from './reducers/loggedUserReducer';
+import { browserHistory } from 'react-router';
 // import {reducer as formReducer} from "redux-form";
 
 const middleware = routerMiddleware(browserHistory);
 
+const reducers = combineReducers({
+  loggedUserState: loggedUserReducer
+});
+
 const store = createStore(
-  projectDataReducer,
+  reducers,
   compose(
     applyMiddleware(thunk, middleware)
     // window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -22,4 +26,3 @@ if (window && !window.store) {
 }
 
 export default store;
-
